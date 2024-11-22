@@ -1,0 +1,14 @@
+{
+    "manifest_version": 3,
+    "name": "Text Summarizer",
+    "version": "1.0",
+    "permissions": ["activeTab", "storage", "scripting"],
+    "action": {
+      "default_popup": "index.html",
+      "default_icon": {
+        "16": "icon32.png"
+      }
+    }
+
+  }
+  
