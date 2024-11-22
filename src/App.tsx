@@ -16,98 +16,9 @@ const App = () => {
     elevenLabsApiKey: "", // New state for ElevenLabs API key
     voiceId: "21m00Tcm4TlvDq8ikWAM", // Default voice ID (you can make this configurable)
     isPlayingAudio: false,
-    isSidebarVisible: false,
-
   });
 
-  const injectSidebar = () => {
-    // Create sidebar container
-    const sidebarContainer = document.createElement('div');
-    sidebarContainer.id = 'extension-sidebar';
-    sidebarContainer.style.cssText = `
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: 300px;
-      height: 100vh;
-      background: white;
-      box-shadow: -2px 0 5px rgba(0,0,0,0.1);
-      z-index: 10000;
-      padding: 20px;
-      overflow-y: auto;
-      transition: transform 0.3s ease;
-    `;
-  
-    // Create sidebar content
-    const sidebarContent = `
-      <div style="position: relative;">
-        <h2 style="margin-bottom: 20px;">Text Summarizer</h2>
-        <button id="close-sidebar" style="
-          position: absolute;
-          top: 0;
-          right: 0;
-          background: none;
-          border: none;
-          cursor: pointer;
-          padding: 5px;
-        ">✕</button>
-        
-        <div style="margin-bottom: 15px;">
-          <label style="display: block; margin-bottom: 5px;">
-            API Key:
-            <input type="password" id="api-key-input" style="width: 100%; padding: 8px;" />
-          </label>
-        </div>
-  
-        <div style="margin-bottom: 15px;">
-          <label style="display: block; margin-bottom: 5px;">
-            System Prompt:
-            <textarea id="system-prompt" style="width: 100%; padding: 8px;" 
-              placeholder="E.g., Summarize in 2 sentences"></textarea>
-          </label>
-        </div>
-  
-        <button id="summarize-btn" style="
-          width: 100%;
-          padding: 10px;
-          background: #1a73e8;
-          color: white;
-          border: none;
-          border-radius: 4px;
-          cursor: pointer;
-        ">Summarize</button>
-  
-        <div id="summary-container" style="margin-top: 20px;"></div>
-      </div>
-    `;
-  
-    // Set content and append to body
-    sidebarContainer.innerHTML = sidebarContent;
-    document.body.appendChild(sidebarContainer);
-  
-    // Add padding to body to prevent content overlap
-    document.body.style.paddingRight = '300px';
-  
-    // Add event listeners
-    
-  };
 
-   // Toggle Sidebar visibility
-   const toggleSidebar = () => {
-    if (state.isSidebarVisible) {
-      document.getElementById('extension-sidebar')?.remove();
-    } else {
-      injectSidebar();
-    }
-    setState(prev => ({ ...prev, isSidebarVisible: !prev.isSidebarVisible }));
-  };
-
-  useEffect(() => {
-    // When the extension is loaded, make sure to toggle sidebar if needed
-    if (state.isSidebarVisible) {
-      injectSidebar();
-    }
-  }, [state.isSidebarVisible]);
 
   // Add text-to-speech function
   const speakText = async () => {
@@ -273,14 +184,7 @@ const App = () => {
       <div className="w-full max-w-[400px] bg-white rounded-lg shadow-lg p-6">
         <h1 className="text-2xl font-bold text-gray-800 mb-4 text-center">Text Summarizer</h1>
          {/* Sidebar Toggle Button */}
-        <div className="mb-4">
-          <button
-            onClick={toggleSidebar}
-            className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600"
-          >
-            {state.isSidebarVisible ? 'Hide Sidebar' : 'Show Sidebar'}
-          </button>
-        </div>
+      
         {/* Groq API Key */}
         <div className="mb-4">
           <label className="block text-gray-700 font-medium mb-2">
