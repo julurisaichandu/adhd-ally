@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Groq from 'groq-sdk';
+// import axios from 'axios';
 
 
 const App = () => {
@@ -11,26 +12,76 @@ const App = () => {
     isActive: false,
     summary: "",
     isLoading: false,
-    error: null as string | null
+    error: null as string | null,
+    elevenLabsApiKey: "", // New state for ElevenLabs API key
+    voiceId: "21m00Tcm4TlvDq8ikWAM", // Default voice ID (you can make this configurable)
+    isPlayingAudio: false
   });
-  // const groq = new Groq({
-  //   apiKey: import.meta.env.VITE_REACT_APP_GROQ_API_KEY,
-  //   dangerouslyAllowBrowser: true,
-  // });
 
-  useEffect(() => {
-    // Load stored settings safely
-    
+  // Add text-to-speech function
+  const speakText = async () => {
+    if (!state.summary || !state.elevenLabsApiKey) return;
+
     try {
-     
+      setState(prev => ({ ...prev, isPlayingAudio: true }));
+
+      const response = await fetch(
+        `https://api.elevenlabs.io/v1/text-to-speech/${state.voiceId}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'xi-api-key': state.elevenLabsApiKey
+          },
+          body: JSON.stringify({
+            text: state.summary,
+            model_id: "eleven_monolingual_v1",
+            voice_settings: {
+              stability: 0.5,
+              similarity_boost: 0.75
+            }
+          })
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to generate speech');
+      }
+
+      // Convert the response to blob
+      const audioBlob = await response.blob();
+      const audioUrl = URL.createObjectURL(audioBlob);
+      const audio = new Audio(audioUrl);
+      
+      audio.onended = () => {
+        setState(prev => ({ ...prev, isPlayingAudio: false }));
+        URL.revokeObjectURL(audioUrl); // Clean up
+      };
+
+      audio.play();
+    } catch (err) {
+      setState(prev => ({ 
+        ...prev, 
+        error: err instanceof Error ? err.message : "Failed to play audio",
+        isPlayingAudio: false 
+      }));
+      alert(err instanceof Error ? err.message : "Failed to play audio");
+    }
+  };
+
+  // Update useEffect to load ElevenLabs API key
+  useEffect(() => {
+    try {
       chrome.storage.sync.get(
-        ["apiKey", "systemPrompt", "isActive"], 
+        ["apiKey", "systemPrompt", "isActive", "elevenLabsApiKey", "voiceId"],
         (data) => {
           setState(prev => ({
             ...prev,
             apiKey: data.apiKey || "",
             systemPrompt: data.systemPrompt || "",
-            isActive: !!data.isActive
+            isActive: !!data.isActive,
+            elevenLabsApiKey: data.elevenLabsApiKey || "",
+            voiceId: data.voiceId || "21m00Tcm4TlvDq8ikWAM"
           }));
         }
       );
@@ -39,12 +90,15 @@ const App = () => {
     }
   }, []);
 
+  // Update saveSettings to include ElevenLabs API key
   const saveSettings = async () => {
     try {
       await chrome.storage.sync.set({
         apiKey: state.apiKey,
         systemPrompt: state.systemPrompt,
-        isActive: state.isActive
+        isActive: state.isActive,
+        elevenLabsApiKey: state.elevenLabsApiKey,
+        voiceId: state.voiceId
       });
       alert("Settings saved successfully!");
     } catch (err) {
@@ -128,7 +182,7 @@ const App = () => {
       <h1>Text Summarizer</h1>
       <div>
         <label>
-          API Key:
+          Groq API Key:
           <input
             type="password"
             value={state.apiKey}
@@ -136,6 +190,33 @@ const App = () => {
               ...prev,
               apiKey: e.target.value
             }))}
+          />
+        </label>
+      </div>
+      <div>
+        <label>
+          ElevenLabs API Key:
+          <input
+            type="password"
+            value={state.elevenLabsApiKey}
+            onChange={(e) => setState(prev => ({
+              ...prev,
+              elevenLabsApiKey: e.target.value
+            }))}
+          />
+        </label>
+      </div>
+      <div>
+        <label>
+          Voice ID:
+          <input
+            type="text"
+            value={state.voiceId}
+            onChange={(e) => setState(prev => ({
+              ...prev,
+              voiceId: e.target.value
+            }))}
+            placeholder="Enter ElevenLabs Voice ID"
           />
         </label>
       </div>
@@ -177,6 +258,12 @@ const App = () => {
         <div>
           <h3>Summary:</h3>
           <p>{state.summary}</p>
+          <button 
+            onClick={speakText}
+            disabled={!state.elevenLabsApiKey || state.isPlayingAudio}
+          >
+            {state.isPlayingAudio ? "Playing..." : "🔊 Speak"}
+          </button>
         </div>
       )}
     </div>
