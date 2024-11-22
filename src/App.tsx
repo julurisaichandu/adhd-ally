@@ -178,96 +178,118 @@ const App = () => {
 
 
   return (
-    <div className="App">
-      <h1>Text Summarizer</h1>
-      <div>
-        <label>
-          Groq API Key:
+    <div className="min-h-screen bg-gray-100 p-4 flex justify-center items-center">
+      <div className="w-full max-w-[400px] bg-white rounded-lg shadow-lg p-6">
+        <h1 className="text-2xl font-bold text-gray-800 mb-4 text-center">Text Summarizer</h1>
+        
+        {/* Groq API Key */}
+        <div className="mb-4">
+          <label className="block text-gray-700 font-medium mb-2">
+            Groq API Key:
+          </label>
           <input
             type="password"
             value={state.apiKey}
-            onChange={(e) => setState(prev => ({
-              ...prev,
-              apiKey: e.target.value
-            }))}
+            onChange={(e) => setState((prev) => ({ ...prev, apiKey: e.target.value }))}
+            className="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-300 focus:outline-none"
           />
-        </label>
-      </div>
-      <div>
-        <label>
-          ElevenLabs API Key:
+        </div>
+        
+        {/* ElevenLabs API Key */}
+        <div className="mb-4">
+          <label className="block text-gray-700 font-medium mb-2">
+            ElevenLabs API Key:
+          </label>
           <input
             type="password"
             value={state.elevenLabsApiKey}
-            onChange={(e) => setState(prev => ({
-              ...prev,
-              elevenLabsApiKey: e.target.value
-            }))}
+            onChange={(e) => setState((prev) => ({ ...prev, elevenLabsApiKey: e.target.value }))}
+            className="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-300 focus:outline-none"
           />
-        </label>
-      </div>
-      <div>
-        <label>
-          Voice ID:
+        </div>
+        
+        {/* Voice ID */}
+        <div className="mb-4">
+          <label className="block text-gray-700 font-medium mb-2">
+            Voice ID:
+          </label>
           <input
             type="text"
             value={state.voiceId}
-            onChange={(e) => setState(prev => ({
-              ...prev,
-              voiceId: e.target.value
-            }))}
+            onChange={(e) => setState((prev) => ({ ...prev, voiceId: e.target.value }))}
             placeholder="Enter ElevenLabs Voice ID"
+            className="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-300 focus:outline-none"
           />
-        </label>
-      </div>
-      <div>
-        <label>
-          System Prompt:
+        </div>
+        
+        {/* System Prompt */}
+        <div className="mb-4">
+          <label className="block text-gray-700 font-medium mb-2">
+            System Prompt:
+          </label>
           <textarea
             value={state.systemPrompt}
-            onChange={(e) => setState(prev => ({
-              ...prev,
-              systemPrompt: e.target.value
-            }))}
+            onChange={(e) => setState((prev) => ({ ...prev, systemPrompt: e.target.value }))}
             placeholder="E.g., Summarize in 2 sentences"
+            className="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-300 focus:outline-none"
           />
-        </label>
-      </div>
-      <div>
-        <label>
-          Activate Extension:
+        </div>
+        
+        {/* Activate Extension */}
+        <div className="mb-4 flex items-center">
           <input
             type="checkbox"
             checked={state.isActive}
-            onChange={(e) => setState(prev => ({
-              ...prev,
-              isActive: e.target.checked
-            }))}
+            onChange={(e) => setState((prev) => ({ ...prev, isActive: e.target.checked }))}
+            className="mr-2"
           />
-        </label>
-      </div>
-      <button onClick={saveSettings}>Save Settings</button>
-      <button 
-        onClick={summarizeText} 
-        disabled={!state.isActive || state.isLoading}
-      >
-        {state.isLoading ? "Summarizing..." : "Summarize Selected Text"}
-      </button>
-      {state.error && <div className="error">{state.error}</div>}
-      {state.summary && (
-        <div>
-          <h3>Summary:</h3>
-          <p>{state.summary}</p>
-          <button 
-            onClick={speakText}
-            disabled={!state.elevenLabsApiKey || state.isPlayingAudio}
+          <label className="text-gray-700 font-medium">Activate Extension</label>
+        </div>
+        
+        {/* Buttons */}
+        <div className="flex justify-between items-center mb-4">
+          <button
+            onClick={() => saveSettings()}
+            className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600"
           >
-            {state.isPlayingAudio ? "Playing..." : "🔊 Speak"}
+            Save Settings
+          </button>
+          <button
+            onClick={() => summarizeText()}
+            disabled={!state.isActive || state.isLoading}
+            className={`px-4 py-2 text-white rounded-lg shadow ${
+              state.isActive
+                ? "bg-green-500 hover:bg-green-600"
+                : "bg-gray-400 cursor-not-allowed"
+            }`}
+          >
+            {state.isLoading ? "Summarizing..." : "Summarize"}
           </button>
         </div>
-      )}
+  
+        {/* Summary and Speak Button */}
+        {state.summary && (
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold text-gray-800">Summary:</h3>
+            <p className="bg-gray-100 p-3 rounded-lg text-gray-700">{state.summary}</p>
+            <button
+              onClick={() => speakText()}
+              disabled={!state.elevenLabsApiKey || state.isPlayingAudio}
+              className={`mt-2 px-4 py-2 text-white rounded-lg shadow ${
+                state.elevenLabsApiKey
+                  ? "bg-purple-500 hover:bg-purple-600"
+                  : "bg-gray-400 cursor-not-allowed"
+              }`}
+            >
+              {state.isPlayingAudio ? "Playing..." : "🔊 Speak"}
+            </button>
+          </div>
+        )}
+  
+        {/* Error */}
+        {state.error && <div className="text-red-600 font-medium">{state.error}</div>}
+      </div>
     </div>
   );
-};
-
+}  
 export default App;
