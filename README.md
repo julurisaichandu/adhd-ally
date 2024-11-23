@@ -1,50 +1,53 @@
-# React + TypeScript + Vite
+# ADHD Ally
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
+The tool simplifies the process of summarizing selected text on web pages using Groq's language models. Additionally, it includes ElevenLabs' text-to-speech (TTS) integration, allowing users to listen to the summaries in natural-sounding voices. 
 
-Currently, two official plugins are available:
+This extension is perfect for anyone who needs concise summaries (useful for cognitively disabled students) and text-to-speech functionality for research, or accessibility purposes.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Features
+- **Summarize Selected Text**: Highlight text on any web page, and the extension will summarize it using a predefined system prompt.
+- **Text-to-Speech (TTS)**: Listen to the summarized text with high-quality voice synthesis from ElevenLabs.
+- **Customizable Settings**:
+  - Groq API Key input for accessing Groq's summarization models.
+  - ElevenLabs API Key input for TTS functionality.
+  - System prompt customization for tailored summaries.
+  - Toggle to activate or deactivate the extension.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+## Prerequisites
+Before installing and building the extension, ensure you have the following:
+- **Google Chrome** or a Chromium-based browser.
+- **Groq API Key**: Obtain this from [Groq](https://groq.com).
+- **ElevenLabs API Key**: Obtain this from [ElevenLabs](https://elevenlabs.io).
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+---
+
+## Installation Guide
+
+### Step 1: Clone the Repository
+```bash
+git clone <repository-url>
+cd text-summarizer-extension
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+### Step 2: Install dependencies
+```bash
+npm install
 ```
+
+
+### Step 3: build tool
+```bash
+npm run build
+```
+
+### follow the step -5 for uploading it into the Chrome browser
+https://medium.com/@tharshita13/creating-a-chrome-extension-with-react-a-step-by-step-guide-47fe9bab24a1
+
+
+
+
