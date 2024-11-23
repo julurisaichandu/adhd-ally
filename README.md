@@ -65,7 +65,7 @@ Figma link - https://www.figma.com/design/oO5gsvc4rImsqWb8h2DZx9/ADHD-Ally?node-
 
 ### Justification for the design is given in the justification-document.pdf file
 ### video for the functionality of the app can be found here
-- https://drive.google.com/file/d/11J4RXQO4s1dzjTG1fA1C3-JE-_E_roQJ/view?usp=sharing
+- https://drive.google.com/drive/folders/1H2wAE5ZbhRHAYNsaVr7vqrRHlbhHkzTn?usp=sharing
 
 
 ## Note
