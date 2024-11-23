@@ -37,7 +37,8 @@ const App = () => {
           },
           body: JSON.stringify({
             text: state.summary,
-            model_id: "eleven_monolingual_v1",
+            model_id: "eleven_turbo_v2_5",
+            language_code: "hi",
             voice_settings: {
               stability: 0.5,
               similarity_boost: 0.75
@@ -212,7 +213,7 @@ const App = () => {
         </div>
         
         {/* Voice ID */}
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label className="block text-gray-700 font-medium mb-2">
             Voice ID:
           </label>
@@ -223,7 +224,7 @@ const App = () => {
             placeholder="Enter ElevenLabs Voice ID"
             className="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-300 focus:outline-none"
           />
-        </div>
+        </div> */}
         
         {/* System Prompt */}
         <div className="mb-4">
@@ -296,3 +297,4 @@ const App = () => {
   );
 }  
 export default App;
+
