@@ -1,50 +1,77 @@
-# React + TypeScript + Vite
+# ADHD Ally
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
+ADHD Ally simplifies the process of summarizing selected text on web pages using Groq's language models. Additionally, it includes ElevenLabs' text-to-speech (TTS) integration, allowing users to listen to the summaries in natural-sounding voices. 
 
-Currently, two official plugins are available:
+This extension is perfect for anyone who needs concise summaries (useful for cognitively disabled students) and text-to-speech functionality for accessibility purposes.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Features
+- **Summarize Selected Text**: Highlight text on any web page, and the extension will summarize it using a predefined system prompt.
+- **Text-to-Speech (TTS)**: Listen to the summarized text with high-quality voice synthesis from ElevenLabs.
+- **Customizable Settings**:
+  - Groq API Key input for accessing Groq's summarization models.
+  - ElevenLabs API Key input for TTS functionality.
+  - System prompt customization for tailored summaries.
+  - Toggle to activate or deactivate the extension.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+## Prerequisites
+Before installing and building the extension, ensure you have the following:
+- **Google Chrome** or a Chromium-based browser.
+- **Groq API Key**: Obtain this from [Groq](https://console.groq.com/keys).
+- **ElevenLabs API Key**: Obtain this from [ElevenLabs](https://elevenlabs.io/app/settings/api-keys).
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+---
+
+## Installation Guide
+
+### Step 1: Clone the Repository
+```bash
+git clone https://github.com/julurisaichandu/adhd-ally.git
+cd adhd-ally
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+### Step 2: Install dependencies
+```bash
+npm install
 ```
+
+### Step 3: build tool
+```bash
+npm run build
+```
+
+### Step-4 Uploading extension into the Chrome browser
+- After building using the step-3, the dist folder will be created in the project root folder
+- To load the extension into Chrome, open Chrome and navigate to the Extensions page by typing chrome://extensions into the address bar. 
+- Click the "Load unpacked" button and select the dist directory in your project.
+- Test your extension by reloading the Extensions page and click on the extension icon.
+
+---
+## Technologies/Libraries used
+- React.js
+- Vite
+
+## Usage Guidelines
+The mockup provides all the usage details for the extension. The extension also has help screen which is useful for getting started
+
+## Mockup
+Figma link - https://www.figma.com/design/oO5gsvc4rImsqWb8h2DZx9/ADHD-Ally?node-id=1-713&t=0LKCfHK6mMmRECKU-1
+
+### Screenshots for the application available in the mockup-ss folder
+
+### Justification for the design is given in the justification-document.pdf file
+### Video for the design is given in adhd-ally-video.mp3 file
+
+## Note
+- I have used generative AI for generation of some parts of code
+- ADHD Ally cannot cannot confirm proper results each and every time. LLMs are prone to hallucination.
+
+
+
+
+
+
