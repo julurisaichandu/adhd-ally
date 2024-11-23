@@ -1,9 +1,15 @@
 # ADHD Ally
 
 ## Description
+<<<<<<< HEAD
 ADHD Ally simplifies the process of summarizing selected text on web pages using Groq's language models. Additionally, it includes ElevenLabs' text-to-speech (TTS) integration, allowing users to listen to the summaries in natural-sounding voices. 
 
 This extension is perfect for anyone who needs concise summaries (useful for cognitively disabled students) and text-to-speech functionality for accessibility purposes.
+=======
+The tool simplifies the process of summarizing selected text on web pages using Groq's language models. Additionally, it includes ElevenLabs' text-to-speech (TTS) integration, allowing users to listen to the summaries in natural-sounding voices. 
+
+This extension is perfect for anyone who needs concise summaries (useful for cognitively disabled students) and text-to-speech functionality for research, or accessibility purposes.
+>>>>>>> d98026157e2e165b1ce62a3cb7c09a75d8425ed7
 
 ---
 
@@ -21,8 +27,13 @@ This extension is perfect for anyone who needs concise summaries (useful for cog
 ## Prerequisites
 Before installing and building the extension, ensure you have the following:
 - **Google Chrome** or a Chromium-based browser.
+<<<<<<< HEAD
 - **Groq API Key**: Obtain this from [Groq](https://console.groq.com/keys).
 - **ElevenLabs API Key**: Obtain this from [ElevenLabs](https://elevenlabs.io/app/settings/api-keys).
+=======
+- **Groq API Key**: Obtain this from [Groq](https://groq.com).
+- **ElevenLabs API Key**: Obtain this from [ElevenLabs](https://elevenlabs.io).
+>>>>>>> d98026157e2e165b1ce62a3cb7c09a75d8425ed7
 
 ---
 
