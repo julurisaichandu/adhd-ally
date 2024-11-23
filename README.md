@@ -75,7 +75,9 @@ Figma link - https://www.figma.com/design/oO5gsvc4rImsqWb8h2DZx9/ADHD-Ally?node-
 ### Screenshots for the application available in the mockup-ss folder
 
 ### Justification for the design is given in the justification-document.pdf file
-### Video for the design is given in adhd-ally-video.mp3 file
+### video for the functionality of the app can be found here
+- https://drive.google.com/file/d/11J4RXQO4s1dzjTG1fA1C3-JE-_E_roQJ/view?usp=sharing
+
 
 ## Note
 - I have used generative AI for generation of some parts of code
